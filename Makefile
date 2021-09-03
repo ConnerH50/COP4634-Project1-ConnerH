@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++11 -g -Wall 
 
 
-OBJECTS = 
+OBJECTS = parse.o 
 
 main:  $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^

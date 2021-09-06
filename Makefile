@@ -8,6 +8,6 @@ myshell:  $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
-	$(RM) *.o main final
+	$(RM) *.o main final myshell
 
 

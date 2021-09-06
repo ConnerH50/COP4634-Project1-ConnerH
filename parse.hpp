@@ -8,8 +8,7 @@ using namespace std;
 
 #define MAXARGS 32
 
-class Parser
-{
+class Parser{
 
 	private:
 		string inputRedirect, outputRedirect;
@@ -17,6 +16,11 @@ class Parser
 		string argumentVector[MAXARGS];
 
 	public:
+		Parser();
+		Parser(string inputRedirect, string outputRedirect, int background, int argumentCount);
+		void runParser();
+		void printParams();
+		~Parser();
 
 
 };

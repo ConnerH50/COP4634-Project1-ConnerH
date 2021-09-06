@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++11 -g -Wall
 
 OBJECTS = parse.o 
 
-main:  $(OBJECTS)
+myshell:  $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:

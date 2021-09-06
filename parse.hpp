@@ -1,8 +1,16 @@
+/*
+ * Conner Hendricks
+ * COP4634
+ * Project 1
+ */
+
+
 #ifndef PARSE_HPP
 #define PARSE_HPP
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include "unistd.h"
 using namespace std;
 

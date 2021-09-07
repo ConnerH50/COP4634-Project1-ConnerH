@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include <string>
-#include <cstring>
 #include "unistd.h"
 using namespace std;
 
@@ -19,14 +18,17 @@ using namespace std;
 class Parser{
 
 	private:
-		string inputRedirect, outputRedirect;
+		//string inputRedirect, outputRedirect;
+		char *inputRedirect;
+		char *outputRedirect;
 		int background, argumentCount;
-		string argumentVector[MAXARGS];
+		//string argumentVector[MAXARGS];
+		char *argumentVector[MAXARGS];
 
 	public:
 		Parser();
 		Parser(string inputRedirect, string outputRedirect, int background, int argumentCount);
-		void runParser();
+		void runParser(bool inDebug);
 		void printParams();
 		~Parser();
 

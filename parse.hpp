@@ -10,7 +10,10 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include "unistd.h"
+#include "string.h"
+
 using namespace std;
 
 #define MAXARGS 32
@@ -27,8 +30,9 @@ class Parser{
 
 	public:
 		Parser();
-		Parser(string inputRedirect, string outputRedirect, int background, int argumentCount);
+		Parser(char *inputRedirect, char *outputRedirect, int background, int argumentCount);
 		void runParser(bool inDebug);
+		void parseString(string stringToBeParsed);
 		void printParams();
 		~Parser();
 

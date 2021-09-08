@@ -23,13 +23,13 @@ int main(int argc, char**argv){
 
 Parser::Parser(){
 	//inputRedirect = "NULL";
-	inputRedirect = NULL;
-	outputRedirect = NULL;
+	inputRedirect = "";
+	outputRedirect = "";
 	background = 0;
 	argumentCount = 0;
 }
 
-Parser::Parser(char *inputRedirect, char *outputRedirect, int background, int argumentCount){
+Parser::Parser(string inputRedirect, string outputRedirect, int background, int argumentCount){
 	
 
 }
@@ -41,7 +41,6 @@ void Parser::runParser(bool inDebug){
 	//cout << "Inside runParser. Debug mode is: " << inDebug << endl;
 
 	string stringToBeParsed = "";
-	//char stringToBeParsed[100];
 
 	do{
 		cout << "Please enter a string to be parsed" << endl;
@@ -55,8 +54,6 @@ void Parser::runParser(bool inDebug){
 		}
 
 	}while(stringToBeParsed != "exit");
-
-	//delete[] parsedString;
 }
 
 void Parser::setArgumentCount(int argumentCount){
@@ -67,31 +64,34 @@ int Parser::getArgumentCount(){
 	return argumentCount;
 }
 
-void Parser::parseString(string stringToBeParsed){
+void Parser::parseString(string stringToBeParsed){ // change c-style strtok to a c++ style
 	cout << "In parseString" << endl;
-	//char *parsedString = new char[stringToBeParsed.length() + 1];
-	//parsedString = new char[stringToBeParsed.length() + 1];
 	
-	char parsedString[stringToBeParsed.length() + 1];
+	//char parsedString[stringToBeParsed.length() + 1];
 	
-	strcpy(parsedString, stringToBeParsed.c_str());
+	//strcpy(parsedString, stringToBeParsed.c_str());
 
-	char *token = strtok(parsedString, " ");
+	//char *token = strtok(parsedString, " ");
 	
-	int numOfTokens = 0;
-	while(token != NULL){
+	//int numOfTokens = 0;
+	/*while(token != NULL){
 		argumentVector[numOfTokens] = string(token);
 		cout << token << endl;
 		cout << "argumentVector: " << argumentVector[numOfTokens] << endl;
 		token = strtok(NULL, " ");
 		numOfTokens++;
+	}*/
+
+	int tokenNum = 0;
+	stringstream parsedString(stringToBeParsed);
+	string token;
+	while(getline(parsedString, token, ' ')){
+		cout << token << endl;
+		argumentVector[tokenNum] = token;
+		tokenNum++;
 	}
 
-	setArgumentCount(numOfTokens);
-
-	//delete[] parsedString;
-
-
+	setArgumentCount(tokenNum);
 }
 
 /*

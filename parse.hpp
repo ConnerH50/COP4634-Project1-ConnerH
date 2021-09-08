@@ -10,9 +10,11 @@
 
 #include <iostream>
 #include <string>
-#include <cstring>
-#include "unistd.h"
-#include "string.h"
+#include <sstream>
+#include <vector>
+//#include <cstring>
+//#include "unistd.h"
+//#include "string.h"
 
 using namespace std;
 
@@ -21,17 +23,17 @@ using namespace std;
 class Parser{
 
 	private:
-		//string inputRedirect, outputRedirect;
-		char *inputRedirect;
-		char *outputRedirect;
+		string inputRedirect, outputRedirect;
+		//char *inputRedirect;
+		//char *outputRedirect;
 		//char *parsedString;
 		int background, argumentCount;
 		string argumentVector[MAXARGS];
-		//char *argumentVector[MAXARGS];
+		//vector<string> argumentVector;
 
 	public:
 		Parser();
-		Parser(char *inputRedirect, char *outputRedirect, int background, int argumentCount);
+		Parser(string inputRedirect, string outputRedirect, int background, int argumentCount);
 		void runParser(bool inDebug);
 		void setArgumentCount(int argumentCount);
 		int getArgumentCount();

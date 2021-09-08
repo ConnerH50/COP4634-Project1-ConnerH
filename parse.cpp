@@ -47,11 +47,8 @@ void Parser::runParser(bool inDebug){
 		cout << "Please enter a string to be parsed" << endl;
 		cout << "$$$ ";
 		getline(cin, stringToBeParsed);
-		//cin.getline(stringToBeParsed, sizeof(stringToBeParsed));
 
 		parseString(stringToBeParsed);
-
-		cout << "your string is: " << stringToBeParsed << endl;
 
 		if(inDebug == true){
 			printParams();
@@ -59,22 +56,40 @@ void Parser::runParser(bool inDebug){
 
 	}while(stringToBeParsed != "exit");
 
-	
+	//delete[] parsedString;
+}
+
+void Parser::setArgumentCount(int argumentCount){
+	this->argumentCount = argumentCount;
+}
+
+int Parser::getArgumentCount(){
+	return argumentCount;
 }
 
 void Parser::parseString(string stringToBeParsed){
 	cout << "In parseString" << endl;
-
-	//int stringLength = stringToBeParsed.length();
-
-	//char parsedString[stringToBeParsed.length()+1];
+	//char *parsedString = new char[stringToBeParsed.length() + 1];
+	//parsedString = new char[stringToBeParsed.length() + 1];
 	
-	char *parsedString = new char[stringToBeParsed.length() + 1];
+	char parsedString[stringToBeParsed.length() + 1];
+	
 	strcpy(parsedString, stringToBeParsed.c_str());
 
-	cout << "Parsed String: " << parsedString << endl;
+	char *token = strtok(parsedString, " ");
+	
+	int numOfTokens = 0;
+	while(token != NULL){
+		argumentVector[numOfTokens] = string(token);
+		cout << token << endl;
+		cout << "argumentVector: " << argumentVector[numOfTokens] << endl;
+		token = strtok(NULL, " ");
+		numOfTokens++;
+	}
 
-	delete[] parsedString;
+	setArgumentCount(numOfTokens);
+
+	//delete[] parsedString;
 
 
 }
@@ -85,6 +100,10 @@ void Parser::parseString(string stringToBeParsed){
 void Parser::printParams(){
 	cout << "In printParams" << endl;
 
+	for(int i = 0; i < getArgumentCount(); i++){
+		cout << "ArgumentVector[" << i << "]: [" << endl <<
+			argumentVector[i] << "]" << endl;
+	}
 }
 
 

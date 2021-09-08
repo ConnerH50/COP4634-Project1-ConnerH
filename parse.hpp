@@ -24,14 +24,17 @@ class Parser{
 		//string inputRedirect, outputRedirect;
 		char *inputRedirect;
 		char *outputRedirect;
+		//char *parsedString;
 		int background, argumentCount;
-		//string argumentVector[MAXARGS];
-		char *argumentVector[MAXARGS];
+		string argumentVector[MAXARGS];
+		//char *argumentVector[MAXARGS];
 
 	public:
 		Parser();
 		Parser(char *inputRedirect, char *outputRedirect, int background, int argumentCount);
 		void runParser(bool inDebug);
+		void setArgumentCount(int argumentCount);
+		int getArgumentCount();
 		void parseString(string stringToBeParsed);
 		void printParams();
 		~Parser();

@@ -82,27 +82,76 @@ void Parser::parseString(string stringToBeParsed){ // change c-style strtok to a
 		numOfTokens++;
 	}*/
 
-	int tokenNum = 0;
+	int argumentNum = 0;
 	stringstream parsedString(stringToBeParsed);
 	string token;
 	while(getline(parsedString, token, ' ')){
-		cout << token << endl;
-		argumentVector[tokenNum] = token;
-		tokenNum++;
+		//cout << token << endl;
+		//cout << token.front() << endl;
+
+		switch(token.front()){
+
+			case '<':
+				if(token == "<"){
+					cout << "Error, < cannot be empty" << endl;
+				}else{
+					inputRedirect = token.erase(0, 1);
+				}
+				break;
+
+			case '>':
+				if(token == ">"){
+					cout << "Error, > cannot be empty" << endl;
+				}else{
+					outputRedirect = token.erase(0, 1);
+				}
+				break;
+
+			case '&':
+				background = 1;
+				break;
+		
+			default:
+				argumentVector[argumentNum] = token;
+				argumentNum++;
+				break;
+		}
+	
 	}
 
-	setArgumentCount(tokenNum);
+	setArgumentCount(argumentNum);
 }
 
 /*
  * Prints parameters when shell is called with -Debug
  */
 void Parser::printParams(){
-	cout << "In printParams" << endl;
+	
+	/*cout << "InputRedirect: [" << (inputRedirect != "") ? inputRedirect : "NULL" << "]" << endl
+		<< "OutputRedirect: [" << (outputRedirect != "") ? outputRedirect : "NULL" << "]" << endl
+		<< "Background: [" << background << "]" << endl;*/
+
+
+
+	/*cout << "InputRedirect:["<<(inputRedirect != NULL)?inputRedirect:"NULL"<< "]"<< endl 
+		<<"OutputRedirect:["<<(outputRedirect != NULL)?outputRedirect:"NULL"<< "]"<< endl 
+		<<"Background: ["<< background << "]"<< endl;*/
+
+	cout << "InputRedirect :[" << inputRedirect << "]" << endl;
+	cout << "OutputRedirect :[" << outputRedirect << "]" << endl;
+	cout << "Background :[" << background << "]" << endl;
 
 	for(int i = 0; i < getArgumentCount(); i++){
-		cout << "ArgumentVector[" << i << "]: [" << endl <<
+		cout << "ArgumentVector[" << i << "]: [" <<
 			argumentVector[i] << "]" << endl;
+	}
+
+	clearArgVector(); // clears argumentVector just in case
+}
+
+void Parser::clearArgVector(){
+	for(int i = 0; i < MAXARGS; i++){
+		argumentVector[i].clear();
 	}
 }
 

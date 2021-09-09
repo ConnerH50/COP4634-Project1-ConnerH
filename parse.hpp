@@ -11,7 +11,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <vector>
 //#include <cstring>
 //#include "unistd.h"
 //#include "string.h"
@@ -29,7 +28,6 @@ class Parser{
 		//char *parsedString;
 		int background, argumentCount;
 		string argumentVector[MAXARGS];
-		//vector<string> argumentVector;
 
 	public:
 		Parser();
@@ -39,6 +37,7 @@ class Parser{
 		int getArgumentCount();
 		void parseString(string stringToBeParsed);
 		void printParams();
+		void clearArgVector();
 		~Parser();
 
 

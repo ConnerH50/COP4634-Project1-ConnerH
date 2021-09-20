@@ -7,7 +7,7 @@
 #include "parse.hpp"
 
 
-int main(int argc, char**argv){
+/*int main(int argc, char**argv){
 	
 	bool inDebug;
 
@@ -27,7 +27,7 @@ int main(int argc, char**argv){
 	}while(stringToBeParsed != "exit");
 
 	return 0;
-}
+}*/
 
 Parser::Parser(){
 	inputRedirect = "";
@@ -59,6 +59,19 @@ void Parser::setArgumentCount(int argumentCount){
 int Parser::getArgumentCount(){
 	return argumentCount;
 }
+
+string Parser::getInputRedirect(){
+	return inputRedirect;
+}
+
+string Parser::getOutputRedirect(){
+	return outputRedirect;
+}
+
+string Parser::getArgumentVectorIndex(int index){
+	return argumentVector[index];
+}
+
 
 void Parser::parseString(string stringToBeParsed){ 
 
@@ -114,6 +127,9 @@ void Parser::printParams(){
 	}
 
 	clearArgVector(); // clears argumentVector just in case
+	inputRedirect = "";
+	outputRedirect = "";
+	background = 0;
 }
 
 void Parser::clearArgVector(){

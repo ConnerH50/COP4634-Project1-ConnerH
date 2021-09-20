@@ -29,6 +29,9 @@ class Parser{
 		void runParser(bool inDebug, string stringToBeParsed);
 		void setArgumentCount(int argumentCount);
 		int getArgumentCount();
+		string getInputRedirect();
+		string getOutputRedirect();
+		string getArgumentVectorIndex(int index);
 		void parseString(string stringToBeParsed);
 		void printParams();
 		void clearArgVector();

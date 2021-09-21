@@ -47,7 +47,7 @@ Parser::Parser(string inputRedirect, string outputRedirect, int background, int 
 void Parser::runParser(bool inDebug, string stringToBeParsed){
 	parseString(stringToBeParsed);
 
-	if(inDebug == true){
+	if(inDebug == true){ //does this last
 		printParams();
 	}
 }
@@ -72,6 +72,22 @@ string Parser::getArgumentVectorIndex(int index){
 	return argumentVector[index];
 }
 
+string *Parser::getArgVector(){
+
+	/*for(int i = 0; i < getArgumentCount(); i++){
+		cout << "argument Count: " << getArgumentCount() << endl;
+		cout << "argument vector: " << argumentVector[i] << endl;
+		
+		//strcpy(argVector[i], argumentVector[i].c_str());
+		//cout << "argVector: " << argVector[i] << endl;
+	}
+
+	for(int i = 0; i < getArgumentCount(); i++){
+		//cout << argVector[i] << endl;
+	}*/
+	return argumentVector;
+}
+
 
 void Parser::parseString(string stringToBeParsed){ 
 
@@ -84,6 +100,7 @@ void Parser::parseString(string stringToBeParsed){
 			case '<':
 				if(token == "<"){
 					cout << "Error, < cannot be empty" << endl;
+					return;
 				}else{
 					inputRedirect = token.erase(0, 1);
 				}
@@ -92,6 +109,7 @@ void Parser::parseString(string stringToBeParsed){
 			case '>':
 				if(token == ">"){
 					cout << "Error, > cannot be empty" << endl;
+					return;
 				}else{
 					outputRedirect = token.erase(0, 1);
 				}
@@ -126,7 +144,7 @@ void Parser::printParams(){
 			argumentVector[i] << "]" << endl;
 	}
 
-	clearArgVector(); // clears argumentVector just in case
+	//clearArgVector(); // clears argumentVector just in case
 	inputRedirect = "";
 	outputRedirect = "";
 	background = 0;

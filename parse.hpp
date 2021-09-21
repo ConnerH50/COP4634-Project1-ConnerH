@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <sstream>
 
 using namespace std;
@@ -22,6 +23,7 @@ class Parser{
 		string inputRedirect, outputRedirect;
 		int background, argumentCount;
 		string argumentVector[MAXARGS];
+		char *argVector[MAXARGS];
 
 	public:
 		Parser();
@@ -32,6 +34,7 @@ class Parser{
 		string getInputRedirect();
 		string getOutputRedirect();
 		string getArgumentVectorIndex(int index);
+		string *getArgVector();
 		void parseString(string stringToBeParsed);
 		void printParams();
 		void clearArgVector();

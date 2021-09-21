@@ -23,7 +23,7 @@ class Parser{
 		string inputRedirect, outputRedirect;
 		int background, argumentCount;
 		string argumentVector[MAXARGS];
-		char *argVector[MAXARGS];
+		const char *argVector[MAXARGS];
 
 	public:
 		Parser();

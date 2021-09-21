@@ -121,6 +121,7 @@ void Parser::parseString(string stringToBeParsed){
 		
 			default:
 				argumentVector[argumentNum] = token;
+				argVector[argumentNum] = token.c_str();
 				argumentNum++;
 				break;
 		}

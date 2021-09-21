@@ -7,13 +7,16 @@
 
 //Parser parse; // may not need
 
+const char *argVec[MAXARGS];
+
 void convertToCArray(Parser parse){
-	char *argVec[MAXARGS];
+	//char *argVec[MAXARGS];
 	for(int i = 0; i <  parse.getArgumentCount(); i++){
 		const char *temp = parse.getArgumentVectorIndex(i).c_str();
-		cout << temp << endl; 
+		//cout << temp << endl;
+		argVec[i] = temp;
 		//strcpy(argVec[i], temp);
-		//cout << argVec[i] << endl;
+		cout << "const char * : " << argVec[i] << endl;
 	}
 	//return argVec;
 }

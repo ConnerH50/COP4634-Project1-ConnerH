@@ -1,23 +1,35 @@
 #include "parse.hpp"
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <sys/wait.h>
 #include <fstream>
+#include <string.h>
 //#include <sys/type.h>
 
 //Parser parse; // may not need
 
-const char *argVec[MAXARGS];
+//const char *argVec[MAXARGS]; // may not need, must be a const char* to prevent unwanted access
+char *argVec[MAXARGS];
+
+//const char *temp;
+char *temp;
 
 void convertToCArray(Parser parse){
-	//char *argVec[MAXARGS];
-	for(int i = 0; i <  parse.getArgumentCount(); i++){
-		const char *temp = parse.getArgumentVectorIndex(i).c_str();
-		//cout << temp << endl;
-		argVec[i] = temp;
-		//strcpy(argVec[i], temp);
-		cout << "const char * : " << argVec[i] << endl;
-	}
+
+	cout << "Inside convertToCArray()" << endl;
+	cout << parse.getArgumentCount() << endl;
+	string tempString = parse.getArgumentVectorIndex(0);
+
+	temp = const_cast<char*>(tempString.c_str());
+	//temp = tempString.data();
+	//strcpy(temp, parse.getArgumentVectorIndex(0).c_str());
+	cout << "Temp: " << temp << endl;
+	argVec[0] = temp;
+
+	
+
+	cout << "ArgVec : " << argVec[0] << endl;
 	//return argVec;
 }
 
@@ -35,10 +47,20 @@ void runShell(Parser parse){
 
 	}else{ // child will execute
 		//cout << "Child pid: " << getpid() << endl;
+		convertToCArray(parse);
 		
 		//const char *temp = parse.getArgumentVectorIndex(0).c_str();
-		//execve("ls", parse.getArgVector(), NULL);
-		convertToCArray(parse);
+		//execvp("ls", (char * const*)argVec);
+
+		//char *cmd[] = {"ls", "-l", NULL};
+		//execvp("ls", cmd);
+
+
+		//execlp("ls", "-l", NULL);
+
+		cout << "const char* : " << argVec[0] << endl;
+		printf("%s\n", argVec[0]);
+		//convertToCArray(parse);
 		exit(0);
 
 	}
@@ -62,7 +84,9 @@ int main(int argc, char**argv){
 		cout << "$$$ ";
 		getline(cin, stringToBeParsed);
 		parse.runParser(inDebug, stringToBeParsed);
+
 		cout << endl << endl;
+
 		runShell(parse);
 		parse.clearArgVector();
 	}  //}while(stringToBeParsed != "exit");

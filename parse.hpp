@@ -23,7 +23,9 @@ class Parser{
 		string inputRedirect, outputRedirect;
 		int background, argumentCount;
 		string argumentVector[MAXARGS];
-		const char *argVector[MAXARGS];
+		//const char *argVector[MAXARGS]; // must be a const char * to prevent unwanted acess
+		char *argVector[MAXARGS];
+		char *temp;
 
 	public:
 		Parser();
@@ -36,6 +38,7 @@ class Parser{
 		string getArgumentVectorIndex(int index);
 		string *getArgVector();
 		void parseString(string stringToBeParsed);
+		void parseIntoCString(string stringToBeParsed);
 		void printParams();
 		void clearArgVector();
 		~Parser();

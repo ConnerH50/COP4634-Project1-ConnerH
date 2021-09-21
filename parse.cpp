@@ -7,28 +7,6 @@
 #include "parse.hpp"
 
 
-/*int main(int argc, char**argv){
-	
-	bool inDebug;
-
-	if(argv[1] != NULL && string(argv[1]) == "-Debug"){
-		inDebug = true;
-	}
-	
-	string stringToBeParsed = "";
-	Parser parse;
-
-	cout << "Please enter a string to be parsed" << endl;
-	do{
-		cout << "$$$ ";
-		getline(cin, stringToBeParsed);
-		parse.runParser(inDebug, stringToBeParsed);
-		cout << endl << endl;
-	}while(stringToBeParsed != "exit");
-
-	return 0;
-}*/
-
 Parser::Parser(){
 	inputRedirect = "";
 	outputRedirect = "";
@@ -46,6 +24,7 @@ Parser::Parser(string inputRedirect, string outputRedirect, int background, int 
  */
 void Parser::runParser(bool inDebug, string stringToBeParsed){
 	parseString(stringToBeParsed);
+	parseIntoCString(stringToBeParsed);
 
 	if(inDebug == true){ //does this last
 		printParams();
@@ -121,7 +100,8 @@ void Parser::parseString(string stringToBeParsed){
 		
 			default:
 				argumentVector[argumentNum] = token;
-				argVector[argumentNum] = token.c_str();
+				//argVector[argumentNum] = token.c_str(); // works sort of
+				//strcpy(argVector[argumentNum], token.c_str());
 				argumentNum++;
 				break;
 		}
@@ -129,6 +109,18 @@ void Parser::parseString(string stringToBeParsed){
 	}
 
 	setArgumentCount(argumentNum);
+}
+
+void Parser::parseIntoCString(string stringToBeParsed){
+	int stringLength = stringToBeParsed.length();
+	char buff[stringLength];
+
+	for(int i = 0; i < stringLength; i++){
+		buff[i] = stringToBeParsed.at(i);
+	}
+
+	cout << buff << endl;
+
 }
 
 /*
